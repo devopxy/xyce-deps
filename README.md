@@ -1,2 +1,2 @@
-# xyce
-A parallel spice solver in a box !
+# xyce - Dependencies
+A building block for Xyce Dockerimage !
