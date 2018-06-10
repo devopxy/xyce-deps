@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-  - docker build -t devopxy/xyce  .
+  - docker build -t devopxy/xyce-deps  .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
