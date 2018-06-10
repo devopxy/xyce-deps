@@ -5,7 +5,7 @@ services:
 
 script:
   - docker build -t devopxy/xyce-deps:latest .
-  - bash docker_push
+  - bash docker_push.sh
 
 
   
