@@ -24,13 +24,13 @@ make config prefix=$XYCE_OUTDIR && make && make install && cd ../ && rm -rf parm
 ENV TRILINOS_VERSION=12.12.1
 COPY ./trilinos-reconfigure-parallel.sh ./trilinos-reconfigure.sh
 RUN mkdir Trilinos && cd Trilinos && curl -L https://github.com/trilinos/Trilinos/archive/trilinos-release-${TRILINOS_VERSION//./-}.tar.gz | \
-tar xz && mv Trilinos-trilinos-release-${TRILINOS_VERSION//./-} trilinos-source && ../trilinos-reconfigure.sh && make && make install && cd ../ && rm -rf Trilinos*
+tar xz && mv Trilinos-trilinos-release-${TRILINOS_VERSION//./-} trilinos-source && ../trilinos-reconfigure.sh && make && make install && cd ../ && rm -rf Trilinos* && rm trilinos-reconfigure.sh
 
 ## Builds Xyce : latest version
 ENV XYCE_VERSION=6.8 
 COPY ./xyce-reconfigure-parallel.sh ./xyce-build/xyce-reconfigure.sh
 RUN curl https://xyce.sandia.gov/downloads/_assets/documents/Xyce-${XYCE_VERSION}.tar.gz | tar xz && mv Xyce-${XYCE_VERSION} Xyce && cd xyce-build && \
-./xyce-reconfigure.sh && make && make install && cd ../ && rm -rf Xyce/
+./xyce-reconfigure.sh && make && make install && cd ../ && rm -rf $XYCE_SRCDIR 
 
 RUN groupadd -r xyce && useradd --no-log-init -d $XYCE_SRCDIR -r -g xyce xyce && chown -R xyce:xyce $XYCE_SRCDIR
 USER xyce
